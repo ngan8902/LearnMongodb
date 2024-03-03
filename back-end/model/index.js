@@ -6,3 +6,13 @@ var url = "mongodb+srv://bichngan8902:5qQhQ8P1gnrTwyfN@cluster0.okizolf.mongodb.
 mongoose.connect(url).then(() => {
     console.log('Connected')
 })
+
+// //Tích hợp với Sequelize 
+// const { Sequelize } = require('sequelize');
+
+// const sequelize = new Sequelize('delicious', 'root', '123456',{
+//     host: '3307',
+//     dialect: 'mysql' 
+// });
+
+
