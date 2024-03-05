@@ -1,60 +1,39 @@
 const express = require("express");
+const { createServer } = require('http');
 const cors = require('cors');
 const app = express();
-const port = 3000;
+const server = createServer(app);
+const morgan = require('morgan')
+app.set('port', process.argv[2] || 8000);
+const port = process.env.PORT || app.get('port');
 const bodyParser = require('body-parser');
-const { userModel } = require('./model/schemas/user.schema')
-const { eventModel } = require('./model/schemas/event.schema')
-const { postModel } = require('./model/schemas/post.schema')
+const userRouter = require('./router/user');
+const eventRouter = require('./router/event');
+
 
 
 require('./model')
-app.use(express.json())
+
+//Middelware
+
+app.set('view engine', 'ejs');
 
 app.use(cors())
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
+
+app.use(morgan("common"))
 
 app.use(express.static(__dirname + '/public/build'));
 console.log(__dirname + '/public/build')
 
-app.get('/adduser', async (req, res, next) => {
-  await userModel.create({
-    username: 'Bich Ngan',
-    email: 'bichnganb722@gmail.com',
-    password: '12345',
-    fullname: 'ngan nguyen'
-  })
-  const userList = await userModel.find()
-  res.json(userList)
-})
+//Router
+app.use("/api/user", userRouter)
 
-app.get('/addevent', async (req, res, next) => {
-  await eventModel.create({
-    name: 'event 1',
-    user: '65e2caf4f512ca59eb62c6ad'
-  })
-  res.end()
-})
+app.use("/api/event", eventRouter)
 
-app.get('/addpost', async (req, res, next) => {
-  await postModel.create({
-    titel: 'Tiệc sinh nhật',
-    author: '65e2caf4f512ca59eb62c6ad'
-  })
-  res.end()
-})
 
-app.get('/getevent', async (req, res, next) => {
-  const eventlist = await eventModel.find().populate('user')
-  res.json(eventlist)
-})
-
-app.get('/getpost', async (req, res, next)=> {
-  const postlist = await postModel.find().populate('author')
-  res.json(postlist)
-})
-
-app.listen(port, function () {
-    console.log(`Example app listening on port ${port}!`);
-  });
+server.listen(port, function () {
+  console.log(`Example app listening on port ${port}!`);
+});

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập và Đăng ký</title>
+    <link rel="stylesheet" href="../assets/css/styles2.css">
+    <link href="../assets/img/favicon2.png" rel="icon">
+
+</head>
+<body>
+    <div class="container" id="loginContainer">
+        <h2>Đăng nhập</h2>
+        <input type="text" id="username" placeholder="Email">
+        <input type="password" id="password" placeholder="Mật khẩu">
+        <p id="test2" style="color: red"></p>
+        <button id="loginBtn">Đăng nhập</button>
+        <div class="social-login">
+            <button class="facebook"><i class="fab fa-facebook-f"></i> Facebook</button>
+            <button class="google"><i class="fab fa-google"></i> Google</button>
+        </div>
+        <p>Hoặc <a href="#" id="registerLink">Đăng ký</a></p>
+    </div>
+
+    <div class="container" style="display: none;" id="registerContainer">
+        <h2>Đăng ký</h2>
+        <input type="text" id="regUsername" placeholder="Email">
+        <input type="password" id="regPassword" placeholder="Mật khẩu">
+        <button id="registerBtn">Đăng ký</button>
+        <div class="social-login">
+            <button class="facebook"><i class="fab fa-facebook-f"></i> Facebook</button>
+            <button class="google"><i class="fab fa-google"></i> Google</button>
+        </div>
+        <p>Đã có tài khoản? <a href="#" id="loginLink">Đăng nhập</a></p>
+    </div>
+
+    <script src="../assets/js/jquery-3.7.1.min.js"></script>
+    <script src="../assets/js/login.js"></script>
+</body>
+</html>

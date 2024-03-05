@@ -1,21 +1,30 @@
-const { Schema, Types, model } = require('mongoose');
+const mongoose = require('mongoose');
 
-const eventSchema = new Schema({
-    name: String,
+const eventSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    day:{
+        type: String,
+        required: true
+    },
+    address: {
+        type: String,
+        required: true
+    },
     content: String,
-    day: String,
-    address: String,
     typeofevent: String,
     user: {
-        type: [
+        type: 
             {
-                type: Schema.Types.ObjectId,
+                type: mongoose.Schema.Types.ObjectId,
                 ref: 'users'
             }
-        ]
+        
     }
 })
-const eventModel = model('events', eventSchema);
+const eventModel = mongoose.model('events', eventSchema);
 module.exports = {
     eventModel
 }
