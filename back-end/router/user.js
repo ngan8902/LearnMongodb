@@ -3,7 +3,7 @@ const router = require('express').Router();
 const userController = require('../controller/user.controller');
 
 //ADD USER
-router.post("/", userController.addUsser);
+// router.post("/", userController.addUsser);
 
 //GET ALL USER
 router.get("/", userController.getAllUser);
@@ -16,6 +16,14 @@ router.put("/:id", userController.updateUser);
 
 //DELETE USER
 router.delete("/:id", userController.deletedUser);
+
+//SIGNUP
+router.post("/signup", userController.signup);
+
+//lOGIN 
+router.post("/login", userController.login);
+
+
 
 
 module.exports = router;

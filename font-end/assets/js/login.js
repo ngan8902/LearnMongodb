@@ -15,19 +15,22 @@ $(document).ready(function () {
         var email = $("#email").val();
         var password = $("#password").val();
 
-        $.get('/login', function(response, err) {
-                // Xử lý dữ liệu trả về từ server
-                $('#message').text(response.message);
-                if (response.success) {
-                    // Redirect hoặc thực hiện hành động khác khi đăng nhập thành công
-                    window.location.href = 'font-end/home.html';
-                }
-                if(err){
-                    $("#test2").html("Đăng nhập thất bại!")
-                }
+        $.ajax({
+            url: 'http://localhost:8000/api/user/login',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                email: regUsername,
+                password: regPassword,
+            }),
+            success: function(response) {
+                console.log('API call success:', response);
+                window.location.href = 'font-end/page/login.html'                
             },
+        })
+
            
-        );
+       
     
         // // Gửi yêu cầu POST đến API đăng nhập
         // $.post('/login', { email: email, password: password })
@@ -45,7 +48,34 @@ $(document).ready(function () {
     $("#registerBtn").click(function () {
         var regUsername = $("#regUsername").val();
         var regPassword = $("#regPassword").val();
+        var regFullname = $("#regFullname").val();
+        var regPhonenumber = $("#regPhonenumber").val();
+
         console.log("Đăng ký với " + regUsername + " và " + regPassword);
+
+        $.ajax({
+            url: 'http://localhost:8000/api/user/signup',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                email: regUsername,
+                fullname: regFullname,
+                password: regPassword,
+                phonenumber: regPhonenumber
+            }),
+            success: function(response) {
+                console.log('API call success:', response);
+                $("#loginContainer").show();
+                $("#registerContainer").hide();
+                
+            },
+            error: function(xhr, status, error) {
+                console.error('API call error:', error);
+                $("#test1").html("Đăng ký thất bại!");
+                // Xử lý lỗi ở đây nếu cần
+            }
+        });
+        
     });
 });
 

@@ -11,7 +11,6 @@ const userRouter = require('./router/user');
 const eventRouter = require('./router/event');
 
 
-
 require('./model')
 
 //Middelware
@@ -30,8 +29,8 @@ console.log(__dirname + '/public/build')
 
 //Router
 app.use("/api/user", userRouter)
-
 app.use("/api/event", eventRouter)
+
 
 
 server.listen(port, function () {
